@@ -1,135 +1,96 @@
-# Predicting Wine Quality Using Machine Learning
+# Predicting the Quality of Red Wine Using Machine Learning
 
-This project focuses on predicting the quality of red wine (`quality`) based on chemical properties. The analysis spans exploratory data analysis, feature engineering, and machine learning model development. The project evaluates multiple models, selects the best-performing ones, and extracts actionable insights for understanding wine quality.
-
----
-
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Dataset Description](#dataset-description)
-3. [Workflow](#workflow)
-4. [Results](#results)
-5. [How to Run the Project](#how-to-run-the-project)
-6. [Future Work](#future-work)
-7. [Acknowledgments](#acknowledgments)
-8. [Contact](#contact)
+This project focuses on predicting the quality of red wine based on various chemical properties. Through **exploratory data analysis (EDA), feature selection, machine learning model comparison, and hyperparameter tuning**, we identify the best-performing model for wine classification. Additionally, we deploy the final model using **FastAPI** and **Docker** for real-world inference.
 
 ---
 
-## Introduction
-
-Wine quality prediction is a challenging multi-class classification problem with applications in the wine industry. This project leverages machine learning to predict wine quality based on physicochemical properties such as acidity, alcohol content, and sugar levels.
-
-The analysis identifies the most influential features and builds interpretable, high-performing models to predict wine quality while addressing challenges like class imbalance and feature representation.
-
----
-
-## Dataset Description
-
-The dataset contains data for red wines from the Portuguese "Vinho Verde" region. It includes physicochemical features and a quality score assigned by wine tasters. The target variable (`quality`) ranges from 3 to 8, representing different levels of wine quality.
-
-**Key Statistics**:
-- **Total records**: 1,599
-- **Number of features**: 12 (11 input features + 1 target variable)
-- **Feature examples**:
-  - `fixed_acidity`, `volatile_acidity`, `alcohol`
-- **Target variable**: `quality` (multiclass: 3–8)
+## **Table of Contents**
+1. [Introduction](#introduction)  
+2. [Dataset Description](#dataset-description)  
+3. [Project Workflow](#project-workflow)  
+4. [Results](#results)  
+5. [Installation & Running the Project](#installation--running-the-project)  
+6. [Future Enhancements](#future-enhancements)  
+7. [Acknowledgments](#acknowledgments)  
+8. [Contact](#contact)  
 
 ---
 
-## Workflow
+## **Introduction**
+Wine quality is influenced by a combination of **chemical properties** such as acidity, sugar content, and alcohol levels. This project leverages machine learning to build a classification model that predicts wine quality based on these characteristics.
 
-1. **Problem Understanding**:
-   - The goal was to predict wine quality based on physicochemical properties using multi-class classification.
-
-2. **Exploratory Data Analysis (EDA)**:
-   - Investigated feature distributions and relationships with wine quality.
-   - Identified Alcohol, Sulphates, and Volatile Acidity as key predictors.
-
-3. **Data Preprocessing**:
-   - Addressed class imbalance, explored scaling impacts, and ensured data quality.
-   - Standardized data selectively for models like Support Vector Machines (SVM).
-
-4. **Baseline Model Performance**:
-   - Evaluated a variety of models, including Logistic Regression, Random Forest, and Neural Networks, to establish baseline metrics.
-
-5. **Hyperparameter Tuning**:
-   - Optimized key models, including Random Forest and Gradient Boosting algorithms, to enhance performance.
-
-6. **Feature Importance Analysis**:
-   - Used the Random Forest model to rank feature importance and identify the top contributors to wine quality.
-
-7. **Final Evaluation**:
-   - Validated top models on the test set to confirm generalizability.
+### **Objectives**
+- Perform **data preprocessing and feature engineering** to enhance model performance.
+- Explore different **machine learning algorithms** and select the most effective model.
+- Deploy the trained model as a **FastAPI web service** for real-time predictions.
 
 ---
 
-## Results
+## **Dataset Description**
+The dataset used for this project comes from the **UCI Machine Learning Repository** and contains **1,599 instances of red wine** samples, each with **11 physicochemical attributes** and a **quality rating** (3–8). The key attributes include:
 
-**Top-Performing Models**:
-1. **Random Forest**:
-   - Untuned Accuracy: 62.5% (highest overall performance).
-   - Tuning resulted in minor performance changes, highlighting robust default behavior.
-2. **Extra Trees**:
-   - Untuned Accuracy: 62.1%, making it another strong contender.
-3. **LightGBM**:
-   - Untuned Accuracy: 61.0%, though tuning led to a slight decline.
+- **Fixed Acidity**: The amount of non-volatile acids.
+- **Volatile Acidity**: The amount of acetic acid (excess leads to an unpleasant vinegar taste).
+- **Citric Acid**: Enhances freshness and taste.
+- **Residual Sugar**: The sugar remaining after fermentation.
+- **Chlorides**: Salt content affecting wine preservation.
+- **Free Sulfur Dioxide** & **Total Sulfur Dioxide**: Important preservatives affecting freshness.
+- **Density**: Determines alcohol and sugar content balance.
+- **pH**: Affects taste and preservation.
+- **Sulphates**: Contributes to aroma and microbial stability.
+- **Alcohol**: Influences body and flavor.
 
-**Feature Importance**:
-- The top predictors of wine quality identified by the Random Forest model were:
-  1. **Alcohol**: 15.03% importance.
-  2. **Sulphates**: 11.29% importance.
-  3. **Volatile Acidity**: 10.54% importance.
-
-**Key Observations**:
-- Distance-based models (e.g., SVM) required scaling for optimal performance, whereas tree-based models performed well without it.
-- Class imbalance limited the accuracy for minority classes (e.g., quality scores of 3 and 8).
+The **target variable** represents wine quality, categorized as **low (3–4), medium (5–6), and high (7–8).**
 
 ---
 
-## How to Run the Project
+## **Project Workflow**
 
-To reproduce this analysis, follow the steps below:
+### **1. Exploratory Data Analysis (EDA)**
+- Analyzed feature distributions and correlations to detect key relationships.
+- Identified **alcohol, volatile acidity, and sulphates** as strong quality indicators.
 
+### **2. Data Preprocessing**
+- Handled missing values (if any) and **scaled numerical features where necessary**.
+- Verified that tree-based models (e.g., **Random Forest, LightGBM**) did not require feature scaling.
+
+### **3. Model Selection & Hyperparameter Tuning**
+- Compared multiple models:
+  - **Baseline Models**: Logistic Regression, k-Nearest Neighbors.
+  - **Ensemble Models**: Random Forest, AdaBoost, Extra Trees.
+  - **Gradient Boosting Models**: XGBoost, LightGBM, CatBoost.
+- Tuned hyperparameters using **GridSearchCV & RandomizedSearchCV**.
+- **LightGBM achieved the highest accuracy and robustness, making it the final model selection.**
+
+### **4. Feature Importance Analysis**
+- Compared feature importance rankings across models.
+- Applied **SHAP values to enhance interpretability and analyze misclassifications**.
+
+### **5. Model Deployment**
+- Built a **FastAPI application** to serve predictions via an API.
+- Containerized the model using **Docker** for scalability and portability.
+
+---
+
+## **Results**
+
+### **Best Model: LightGBM**
+| Metric | Score |
+|--------|-------|
+| **Accuracy** | **85.1%** |
+| **Weighted F1-Score** | **0.848** |
+| **ROC-AUC Score** | **0.972** |
+
+### **Key Findings**
+- **Alcohol is the strongest predictor** of wine quality.
+- **Volatile acidity negatively correlates** with quality, confirming its impact on taste.
+- **SHAP analysis highlighted feature interactions**, revealing why certain misclassifications occurred.
+
+---
+
+## **Installation & Running the Project**
+
+### **1. Clone the Repository**
 ```bash
-# Step 1: Clone the repository
-git clone <https://github.com/Devin-Shrode/Wine-Quality>
-
-# Step 2: Navigate to the project directory
+git clone https://github.com/Devin-Shrode/Wine-Quality
 cd Wine-Quality
-
-# Step 3: Install the required libraries
-pip install -r requirements.txt
-
-# Step 4: Open the Jupyter Notebook
-jupyter notebook Wine_Quality_Prediction_Final.ipynb
-
-# Step 5: Run the notebook cells sequentially to reproduce the analysis and results.
-
-```
-
----
-
-## Future Work
-
-1. **Expand Dataset**:
-   - Include additional wine types (e.g., white wines) and data from other regions for broader applicability.
-2. **Address Class Imbalance**:
-   - Implement advanced techniques like SMOTE or ensemble methods tailored for imbalanced data.
-3. **Explore Additional Models**:
-   - Investigate the use of AutoML frameworks or deep learning models for enhanced predictive performance.
-
----
-
-## Acknowledgments
-
-- **Dataset**: Sourced from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Wine+Quality).
-- **Tools**: Analysis conducted using Python and libraries such as Pandas, Scikit-learn, and Matplotlib.
-
----
-
-## Contact
-
-For questions or collaboration, feel free to reach out:
-- **Email**: devin.shrode@proton.me
-- **LinkedIn**: [linkedin.com/in/DevinShrode](https://www.linkedin.com/in/DevinShrode)
