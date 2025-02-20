@@ -60,11 +60,11 @@ The **target variable** represents wine quality, categorized as **low (3–4), m
   - **Ensemble Models**: Random Forest, AdaBoost, Extra Trees.
   - **Gradient Boosting Models**: XGBoost, LightGBM, CatBoost.
 - Tuned hyperparameters using **GridSearchCV & RandomizedSearchCV**.
-- **LightGBM achieved the highest accuracy and robustness, making it the final model selection.**
+- **LightGBM emerged as the best model** in terms of accuracy and robustness.
 
 ### **4. Feature Importance Analysis**
 - Compared feature importance rankings across models.
-- Applied **SHAP values to enhance interpretability and analyze misclassifications**.
+- Used **SHAP values** to validate model interpretation and investigate misclassifications.
 
 ### **5. Model Deployment**
 - Built a **FastAPI application** to serve predictions via an API.
@@ -91,6 +91,62 @@ The **target variable** represents wine quality, categorized as **low (3–4), m
 ## **Installation & Running the Project**
 
 ### **1. Clone the Repository**
-```bash
+``` bash
 git clone https://github.com/Devin-Shrode/Wine-Quality
 cd Wine-Quality
+```
+
+### **2. Set Up Virtual Environment**
+``` bash
+python -m venv wine_env
+source wine_env/bin/activate  # For macOS/Linux
+wine_env\Scripts\activate     # For Windows
+```
+
+### **3. Install Dependencies**
+``` bash
+pip install -r requirements.txt
+```
+
+### **4. Run the FastAPI Server**
+``` bash
+uvicorn wine_api:app --reload
+```
+
+### **5. Test the API**
+- Open a browser and navigate to: **[http://127.0.0.1:8000](http://127.0.0.1:8000)**
+- Use **Postman** or **cURL** to send a POST request:
+``` bash
+curl -X 'POST' 'http://127.0.0.1:8000/predict' -H 'Content-Type: application/json' -d '{"features": [7.4, 0.7, 0.0, 1.9, 0.076, 11.0, 34.0, 0.9978, 3.51, 0.56, 9.4]}'
+```
+
+- Expected response:
+``` json
+{"predicted_quality": 5}
+```
+
+---
+
+## **Future Enhancements**
+While the current model performs well, potential improvements include:
+1. **Expanding the dataset** to include more wine varieties.
+2. **Feature engineering** to create synthetic variables that capture more complex relationships.
+3. **Deploying on the cloud** via **AWS Lambda or Google Cloud Run** for real-time use.
+4. **Building a front-end application** to allow users to upload wine data and receive quality predictions visually.
+
+---
+
+## **Acknowledgments**
+- **Dataset**: Sourced from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Wine+Quality).
+- **Libraries Used**: **Scikit-learn, LightGBM, SHAP, Pandas, Matplotlib, FastAPI, Docker**.
+- **Deployment Tools**: **FastAPI & Docker for scalable model hosting**.
+
+---
+
+## **Contact**
+For any questions or collaboration opportunities, reach out at:
+- **Email**: devin.shrode@proton.me  
+- **LinkedIn**: [linkedin.com/in/DevinShrode](https://www.linkedin.com/in/DevinShrode)  
+- **GitHub**: [github.com/Devin-Shrode/Wine-Quality](https://github.com/Devin-Shrode/Wine-Quality)  
+
+---
