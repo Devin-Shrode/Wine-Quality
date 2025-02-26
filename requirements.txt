@@ -1,27 +1,31 @@
-# Core libraries
-pandas
-numpy
+# Core Libraries
+pandas==2.1.4
+numpy==1.26.4
+scipy==1.11.4
 
-# Data visualization
-matplotlib
-seaborn
+# Data Visualization
+matplotlib==3.10.0
+seaborn==0.13.2
+plotly==6.0.0
 
-# Statistical functions
-scipy
+# Machine Learning Models (All Models Tested)
+scikit-learn==1.5.0
+xgboost==2.1.1
+lightgbm==4.5.0
+catboost==1.2.7
+shap==0.46.0
+eli5==0.13.0
+imbalanced-learn==0.12.0
 
-# Machine learning models
-scikit-learn
-xgboost
-lightgbm
-catboost
-shap
-eli5
-imblearn  # SMOTE for class imbalance handling
+# Model Evaluation and Deployment
+joblib==1.4.2
+fastapi==0.115.8
+uvicorn==0.34.0
+pydantic==2.10.6
+pydantic_core==2.27.2
 
-# Model evaluation and metrics
-joblib
+# Miscellaneous
+python-dateutil==2.9.0.post0
+pytz==2025.1
+tzdata==2025.1
 
-# API & Deployment
-fastapi
-uvicorn
-pydantic
