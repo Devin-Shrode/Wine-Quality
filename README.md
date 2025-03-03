@@ -147,6 +147,6 @@ While the current model performs well, potential improvements include:
 For any questions or collaboration opportunities, reach out at:
 - **Email**: devin.shrode@proton.me  
 - **LinkedIn**: [linkedin.com/in/DevinShrode](https://www.linkedin.com/in/DevinShrode)  
-- **GitHub**: [github.com/Devin-Shrode/Wine-Quality](https://github.com/Devin-Shrode)  
+- **GitHub**: [github.com/Devin-Shrode](https://github.com/Devin-Shrode)  
 
 ---
